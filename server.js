@@ -46,7 +46,7 @@ Functionality: If a valid number is provided, respond with a random whole number
 app.get('/collectibles/:indexparam', (req, res) => {
     const indexparam = Number(req.params.indexparam)
  if (indexparam === 0 || indexparam === 1 || indexparam === 2) {
-    res.send(`So, you want the ${collectibles[indexparam].name}? For ${collectibles[indexparam].price}, it can be yours!`)
+    res.send(`So, you want the ${collectibles[indexparam].name}? For $${collectibles[indexparam].price}, it can be yours!`)
  }
  else
     res.send('This item is not yet in stock. Check back soon!')
