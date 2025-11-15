@@ -16,8 +16,7 @@ Examples: Matches routes like /greetings/Christy or /greetings/Mathilda.
 Response: Include the username from the URL in the response, such as “Hello there, Christy!” or “What a delight it is to see you once more, Mathilda.” */
 
 app.get('/greetings/:username', (req, res)=>{
-    const username = req.query.username
-    
+
     res.send(`Greetings, ${req.params.username}! I hope you have a nice day!`)
 })
 
@@ -36,9 +35,22 @@ Functionality: If a valid number is provided, respond with a random whole number
         res.send(`You must specify a number.`)
 }) */
 
-// 3. I WANT
+// 3. I Want THAT One!
 
-// app.get('/')
+  const collectibles = [
+    { name: 'shiny ball', price: 5.95 },
+    { name: 'autographed picture of a dog', price: 10 },
+    { name: 'vintage 1970s yogurt SOLD AS-IS', price: 0.99 }
+  ];
+
+app.get('/collectibles/:indexparam', (req, res) => {
+    const indexparam = Number(req.params.indexparam)
+ if (indexparam === 0 || indexparam === 1 || indexparam === 2) {
+    res.send(`So, you want the ${collectibles[indexparam].name}? For ${collectibles[indexparam].price}, it can be yours!`)
+ }
+ else
+    res.send('This item is not yet in stock. Check back soon!')
+});
 
 // 4. SHOES
 
