@@ -36,6 +36,45 @@ app.get('/roll/:number', (req, res)=>{
         res.send(`You must specify a number.`)
 })
 
+// 3. I WANT
+
+app.get('/')
+
+// 4. Shoes
+
+const shoes = [
+      { name: "Birkenstocks", price: 50, type: "sandal" },
+      { name: "Air Jordans", price: 500, type: "sneaker" },
+      { name: "Air Mahomeses", price: 501, type: "sneaker" },
+      { name: "Utility Boots", price: 20, type: "boot" },
+      { name: "Velcro Sandals", price: 15, type: "sandal" },
+      { name: "Jet Boots", price: 1000, type: "boot" },
+      { name: "Fifty-Inch Heels", price: 175, type: "heel" }
+  ];
+
+const minPrice = 20;
+const maxPrice = 501;
+
+app.get('/shoes', (req, res) => {
+    if (minPrice) {
+        shoes.filter(shoe => shoe.price <= minPrice)
+        res.send(req.query["min-price"])
+    }
+
+    else if (maxPrice) {
+        shoes.filter(shoe => shoe.price >= maxPrice)
+        res.send(req.query["max-price"])
+    }
+
+    else (type) {
+    res.send(`${req.query.name} ${req.query.type}`);
+    }
+});
+
+  app.get('/shoes', (req, res) => {
+    res.send(`${req.query.name} ${req.query.type}`);
+});
+
 //SERVER LISTENER
 app.listen(3000, ()=>{
     console.log('Listening on port 3000')
