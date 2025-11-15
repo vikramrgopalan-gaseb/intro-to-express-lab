@@ -30,17 +30,17 @@ Validation: If the parameter is not a number, respond with “You must specify a
 
 Functionality: If a valid number is provided, respond with a random whole number between 0 and the given number. For example, a request to /roll/16 might respond with “You rolled a 14.” */
 
-app.get('/roll/:number', (req, res)=>{
+/* app.get('/roll/:number', (req, res)=>{
     const dicenumber = req.query.dicenumber
     if 
         res.send(`You must specify a number.`)
-})
+}) */
 
 // 3. I WANT
 
-app.get('/')
+// app.get('/')
 
-// 4. Shoes
+// 4. SHOES
 
 const shoes = [
       { name: "Birkenstocks", price: 50, type: "sandal" },
@@ -52,30 +52,27 @@ const shoes = [
       { name: "Fifty-Inch Heels", price: 175, type: "heel" }
   ];
 
-const minPrice = 20;
-const maxPrice = 501;
-
-app.get('/shoes', (req, res) => {
-    if (minPrice) {
-        shoes.filter(shoe => shoe.price <= minPrice)
-        res.send(req.query["min-price"])
-    }
-
-    else if (maxPrice) {
-        shoes.filter(shoe => shoe.price >= maxPrice)
-        res.send(req.query["max-price"])
-    }
-
-    else (type) {
-    res.send(`${req.query.name} ${req.query.type}`);
-    }
-});
-
   app.get('/shoes', (req, res) => {
-    res.send(`${req.query.name} ${req.query.type}`);
+    const minPrice = Number(req.query["min-price"]);
+    const maxPrice = Number(req.query["max-price"]);
+    const type = req.query.type
+    let shoeCopy = shoes.slice()
+
+    if (minPrice) {
+        shoeCopy = shoeCopy.filter(shoe => shoe.price >= minPrice)
+    }
+    
+    if (maxPrice) {
+        shoeCopy = shoeCopy.filter(shoe => shoe.price <= maxPrice)
+    }
+    
+    if (type) {
+        shoeCopy = shoeCopy.filter(shoe => shoe.type === type)
+    }
+    res.send(shoeCopy)
 });
 
 //SERVER LISTENER
 app.listen(3000, ()=>{
     console.log('Listening on port 3000')
-})
+});
